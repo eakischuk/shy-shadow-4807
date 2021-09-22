@@ -5,6 +5,8 @@ class Garden < ApplicationRecord
 
   def quick_plants
     plants.where('days_to_harvest < ?', 100)
-    .distinct
+    .select('plants.*, COUNT(plants.*) AS plant_count')
+    .group('plants.id')
+    .order('plant_count DESC')
   end
 end
