@@ -20,7 +20,6 @@ RSpec.describe 'garden show page', type: :feature do
     @plot_25.plants << @plant_3
     @plot_25.plants << @plant_4
 
-    @plot_26.plants << @plant_1
     @plot_26.plants << @plant_3
 
     @plot_2.plants << @plant_2
@@ -39,6 +38,11 @@ RSpec.describe 'garden show page', type: :feature do
       expect(page).to have_content(@plant_3.name, count: 1)
       expect(page).to_not have_content(@plant_4.name, count: 1)
       expect(page).to_not have_content(@plant_2.name)
+    end
+
+    it 'lists plants ordered by quantity in garden' do
+      visit garden_path(@turing_garden.id)
+      expect(@plant_3.name).to appear_before(@plant_1.name)
     end
   end
 end
