@@ -15,7 +15,7 @@ RSpec.describe PlotPlant, type: :model do
     @plant_3 = Plant.create!(name: "Jalapeno", description: "Easy care, needs water and direct sun", days_to_harvest: 55)
     @plant_4 = Plant.create!(name: "Squash", description: "Easy care, needs water and indirect light", days_to_harvest: 70)
 
-  
+
     @plot_25.plants << @plant_3
     @plot_25.plants << @plant_4
     @plot_plant_25_1 = PlotPlant.create!(plot: @plot_25, plant: @plant_1)
@@ -26,11 +26,5 @@ RSpec.describe PlotPlant, type: :model do
   describe 'relationships' do
     it { should belong_to(:plot) }
     it { should belong_to(:plant) }
-  end
-
-  describe 'class methods' do
-    it 'finds record with given plant and plot id' do
-      expect(PlotPlant.specific_plot_plant(@plot_25.id, @plant_1.id)).to eq(@plot_plant_25_1)
-    end
   end
 end
