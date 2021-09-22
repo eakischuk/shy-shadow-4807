@@ -4,6 +4,6 @@ class Plot < ApplicationRecord
   has_many :plants, through: :plot_plants
 
   def plot_plant_for(plant)
-    PlotPlant.specific_plot_plant(id, plant)
+    plot_plants.where('plant_id = ?', plant).first
   end
 end
