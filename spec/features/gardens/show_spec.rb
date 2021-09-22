@@ -36,8 +36,8 @@ RSpec.describe 'garden show page', type: :feature do
       visit garden_path(@turing_garden.id)
       expect(page).to have_content(@plant_1.name, count: 1)
       expect(page).to have_content(@plant_3.name, count: 1)
-      expect(page).to_not have_content(@plant_4.name, count: 1)
-      expect(page).to_not have_content(@plant_2.name)
+      expect(page).to_not have_content(@plant_4.name) # days to harvest > 100
+      expect(page).to_not have_content(@plant_2.name) # not in this garden at all
     end
 
     it 'lists plants ordered by quantity in garden' do
