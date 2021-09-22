@@ -20,7 +20,6 @@ RSpec.describe Garden do
     @plot_25.plants << @plant_3
     @plot_25.plants << @plant_4
 
-    @plot_26.plants << @plant_1
     @plot_26.plants << @plant_3
 
     @plot_2.plants << @plant_2
@@ -39,8 +38,8 @@ RSpec.describe Garden do
   end
 
   describe 'instance methods' do
-    it 'has quick plants' do
-      expect(@turing_garden.quick_plants).to eq([@plant_1, @plant_3])
+    it 'has quick plants ordered by plant quantity' do
+      expect(@turing_garden.quick_plants).to eq([@plant_3, @plant_1])
       expect(@other_garden.quick_plants).to eq([@plant_1, @plant_2, @plant_3])
     end
   end
