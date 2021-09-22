@@ -34,7 +34,7 @@ RSpec.describe 'index page for plots', type: :feature do
 
   describe 'plot and plants display' do
     it 'shows plot numbers and their plants' do
-      visit '/plots'
+      visit plots_path
       within("#plots-#{@plot_25.id}") do
         expect(page).to have_content("##{@plot_25.number}")
         expect(page).to have_content(@plant_1.name)
@@ -61,6 +61,30 @@ RSpec.describe 'index page for plots', type: :feature do
         expect(page).to have_content(@plant_1.name)
         expect(page).to have_content(@plant_3.name)
         expect(page).to have_content(@plant_2.name)
+        expect(page).to have_content(@plant_4.name)
+      end
+    end
+  end
+
+  describe 'links' do
+    it 'has link to remove plant from plot' do
+      visit plots_path
+      within("#plots-#{@plot_738.id}") do
+        expect(page).to have_link("Remove #{@plant_1.name}")
+        expect(page).to have_link("Remove #{@plant_2.name}")
+        expect(page).to have_link("Remove #{@plant_3.name}")
+        expect(page).to have_link("Remove #{@plant_4.name}")
+        click_on "Remove #{@plant_4.name}"
+      end
+      expect(current_path).to eq(plots_path)
+      within("#plots-#{@plot_738.id}") do
+        expect(page).to have_link("Remove #{@plant_1.name}")
+        expect(page).to have_link("Remove #{@plant_2.name}")
+        expect(page).to have_link("Remove #{@plant_3.name}")
+        expect(page).to_not have_content(@plant_4.name)
+        expect(page).to_not have_link("Remove #{@plant_4.name}")
+      end
+      within("#plots-#{@plot_26.id}") do
         expect(page).to have_content(@plant_4.name)
       end
     end
